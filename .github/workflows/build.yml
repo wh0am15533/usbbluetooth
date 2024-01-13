@@ -1,0 +1,53 @@
+name: Build
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        sys:
+          - { os: windows-latest, shell: 'msys2 {0}', ext: dll    }
+          - { os: ubuntu-latest,  shell: bash,        ext: so     }
+          - { os: macos-latest,   shell: bash,        ext: dylib  }
+
+    runs-on: ${{ matrix.sys.os }}
+
+    defaults:
+      run:
+        shell: ${{ matrix.sys.shell }}
+
+    steps:
+    - name: Install dependencies (Ubuntu)
+      if: matrix.sys.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install meson libusb-1.0-0 libusb-1.0-0-dev
+
+    - name: Install dependencies (Mac OS)
+      if: matrix.sys.os == 'macos-latest'
+      run: brew install meson
+
+    - name: Install dependencies (Windows)
+      if: matrix.sys.os == 'windows-latest'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        install: git mingw-w64-x86_64-meson mingw-w64-x86_64-libusb mingw-w64-x86_64-ca-certificates mingw-w64-x86_64-python-certifi mingw-w64-x86_64-gcc
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Configure
+      run: meson setup builddir
+
+    - name: Build
+      run: meson compile -v -C builddir
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: usbbluetooth_${{ matrix.sys.os }}
+        path: builddir/src/libusbbluetooth/libusbbluetooth.${{ matrix.sys.ext }}
