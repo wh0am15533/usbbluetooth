@@ -1,13 +1,13 @@
+LIBRARY usbbluetooth.dll
 EXPORTS
-;
-usbbluetooth_init
-usbbluetooth_exit
-usbbluetooth_get_device_list
-usbbluetooth_free_device_list
-usbbluetooth_reference_device
-usbbluetooth_unreference_device
-usbbluetooth_status_name
-usbbluetooth_open
-usbbluetooth_close
-usbbluetooth_write
-usbbluetooth_read
+    usbbluetooth_init
+    usbbluetooth_exit
+    usbbluetooth_get_device_list
+    usbbluetooth_free_device_list
+    usbbluetooth_reference_device
+    usbbluetooth_unreference_device
+    usbbluetooth_status_name
+    usbbluetooth_open
+    usbbluetooth_close
+    usbbluetooth_write
+    usbbluetooth_read
