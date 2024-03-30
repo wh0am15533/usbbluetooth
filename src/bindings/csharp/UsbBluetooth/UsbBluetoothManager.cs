@@ -18,7 +18,8 @@ namespace UsbBluetooth
 
         public static void Deinit()
         {
-            // Force garbage collector to deal with UsbBluetoothDevices to avoid memleaking while exiting...
+            // Force garbage collector to deal with UsbBluetoothDevices
+            // to avoid memory leaking while exiting...
             GC.Collect();
             GC.WaitForPendingFinalizers();
             // Deinit the lib
@@ -27,7 +28,7 @@ namespace UsbBluetooth
 
         public static unsafe UsbBluetoothDevice[] ListDevices()
         {
-            List<UsbBluetoothDevice> devs = new List<UsbBluetoothDevice>();
+            List<UsbBluetoothDevice> devs = [];
 
             UsbBluetoothDeviceStruct** list;
             UsbBluetoothStatus status = usbbluetooth_get_device_list(&list);
