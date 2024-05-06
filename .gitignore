@@ -3,7 +3,6 @@
 
 # Meson
 builddir/
-subprojects/argtable3*/
-subprojects/cwalk*/
-subprojects/libusb*/
-subprojects/packagecache/
+subprojects/*/
+!subprojects/*.wrap
+!subprojects/packagefiles/
