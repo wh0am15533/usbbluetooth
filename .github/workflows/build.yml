@@ -32,8 +32,8 @@ jobs:
       if: matrix.sys.os == 'windows-latest'
       uses: msys2/setup-msys2@v2
       with:
-        msystem: MINGW64
-        install: git mingw-w64-x86_64-meson mingw-w64-x86_64-libusb mingw-w64-x86_64-ca-certificates mingw-w64-x86_64-python-certifi mingw-w64-x86_64-gcc
+        msystem: UCRT64
+        install: git mingw-w64-ucrt-x86_64-meson mingw-w64-ucrt-x86_64-libusb mingw-w64-ucrt-x86_64-ca-certificates mingw-w64-ucrt-x86_64-python-certifi mingw-w64-ucrt-x86_64-gcc
 
     - name: Checkout
       uses: actions/checkout@v4
