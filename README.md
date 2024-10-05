@@ -1,5 +1,7 @@
 # USB Bluetooth
 
+[![Build](https://github.com/antoniovazquezblanco/usbbluetooth/actions/workflows/build.yml/badge.svg)](https://github.com/antoniovazquezblanco/usbbluetooth/actions/workflows/build.yml)
+
 LibUSB based Bluetooth device driver. Take full control of your USB Bluetooth devices!
 
 
