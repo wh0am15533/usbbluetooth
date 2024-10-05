@@ -13,5 +13,6 @@ executable('usbbt',
     libusbbluetooth_dep,
     argtable_dep,
     cwalk_dep
-  ]
+  ],
+  install: true
 )
