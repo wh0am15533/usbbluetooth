@@ -1,8 +1,27 @@
 # API for C
 
-The C api can be used by importing the corresponding library header. You must link against the library or use a shared library version.
+The `usbbluetooth` library can be used via a C API.
+
+The C api can be used by importing the corresponding C library header.
+You must also link against the library or use a shared library version. For this, you need a binary library file compiled for your platform.
+
+
+## Installing
+
 The library is distributed y binary format available in https://github.com/antoniovazquezblanco/usbbluetooth/releases.
+The library may also be available for installation via your favourite package manager.
+
 You can also choose to compile it for you platform.
+To compile the project just follow the common steps to compile using meson.
+
+```bash
+meson setup build
+meson compile -C build
+sudo meson install
+```
+
+
+## Usage
 
 The following code is an example on how this library can be used:
 ```C
