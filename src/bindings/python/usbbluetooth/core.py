@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import ctypes
-import _c_library
+from usbbluetooth import _c_library
 
 
 def _check_status(status: _c_library._CStatus):
