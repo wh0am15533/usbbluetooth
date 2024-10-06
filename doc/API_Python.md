@@ -1,0 +1,32 @@
+# API for Python
+
+The `usbbluetooth` library can be used via a Python API.
+
+In order to use the library in python just install the Python package.
+The package is available in wheel format in https://github.com/antoniovazquezblanco/usbbluetooth/releases.
+
+After downloading the file, you may install it with pip:
+```bash
+pip install usbbluetooth-*.whl
+```
+
+Once installed, you may follow the example below as a reference on how to list and interact with devices:
+
+```Python
+#!/usr/bin/env python
+
+import usbbluetooth
+
+# Get a list of all the available devices
+devices = usbbluetooth.list_devices()
+for dev in devices:
+    print(dev)
+
+# Open the device
+with devices[0] as dev:
+    # Send a reset command
+    dev.write(b"\x01\x03\x0c\x00")
+    # Read the respose
+    response = dev.read()
+    print(response)
+```
