@@ -44,45 +44,15 @@ jobs:
       run: meson setup builddir
 
     - name: Build the library
-      run: meson compile usbbluetooth -v -C builddir
+      run: meson compile -v -C builddir
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: usbbluetooth_${{ matrix.sys.os }}
-        path: builddir/src/libusbbluetooth/libusbbluetooth.${{ matrix.sys.ext }}
-
-  # build_bindings:
-  #   needs: build_library
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v4
-  #     with:
-  #       fetch-depth: 0
-
-  #   - name: Download artifacts
-  #     uses: actions/download-artifact@v4
-
-  #   - name: Install dependencies
-  #     run: |
-  #       sudo apt-get update
-  #       sudo apt-get install meson libusb-1.0-0 libusb-1.0-0-dev python3-build
-
-  #   - name: Copy library
-  #     run: cp usbbluetooth_*/*.{so,dll,dylib} src/bindings/python/usbbluetooth/lib/
-
-  #   - name: Configure
-  #     run: meson setup builddir
-
-  #   - name: Build python package
-  #     run: meson compile usbbluetooth_python -v -C builddir
-
-  #   - name: Upload artifacts
-  #     uses: actions/upload-artifact@v4
-  #     with:
-  #       name: usbbluetooth_python
-  #       path: builddir/src/bindings/python/*
+        path: |
+          builddir/src/libusbbluetooth/libusbbluetooth.${{ matrix.sys.ext }}
+          builddir/winx64_usbbluetooth_*.zip
 
   release:
     runs-on: ubuntu-latest
@@ -99,6 +69,4 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          usbbluetooth_*/*.so
-          usbbluetooth_*/*.dll
-          usbbluetooth_*/*.dylib
+          usbbluetooth_*/winx64_usbbluetooth_*.zip
