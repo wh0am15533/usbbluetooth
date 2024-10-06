@@ -13,6 +13,14 @@ else
         build_by_default: false,
         depends: tgt_pkg_windows_install,
         install: false,
-        command: [python3, '-m', 'zipfile', '-c', 'winx64_usbbluetooth_'+meson.project_version()+'.zip', meson.current_build_dir() / 'bin', meson.current_build_dir() / 'include', meson.current_build_dir() / 'lib'],
+        command: [
+            python3, '-m', 'zipfile', '-c', 'winx64_usbbluetooth_'+meson.project_version()+'.zip',
+            meson.current_build_dir() / 'bin',
+            meson.current_build_dir() / 'include',
+            meson.current_build_dir() / 'lib',
+            meson.current_build_dir() / 'a' / '_temp' / 'msys64' / 'ucrt64' / 'bin',
+            meson.current_build_dir() / 'a' / '_temp' / 'msys64' / 'ucrt64' / 'include',
+            meson.current_build_dir() / 'a' / '_temp' / 'msys64' / 'ucrt64' / 'lib'
+        ],
         output: 'winx64_usbbluetooth_'+meson.project_version()+'.zip')
 endif
