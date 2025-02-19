@@ -11,3 +11,4 @@ EXPORTS
     usbbluetooth_close
     usbbluetooth_write
     usbbluetooth_read
+    usbbluetooth_log_set_level

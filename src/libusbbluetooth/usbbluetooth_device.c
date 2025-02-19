@@ -2,12 +2,15 @@
 
 #include <stdlib.h>
 #include <utils.h>
+#include <usbbluetooth_log.h>
 
 static int _count_bluetooth_devices(libusb_device **list, int *num);
 static usbbluetooth_device_t *_dev_from_libusb(libusb_device *dev);
 
 usbbluetooth_status_t USBBLUETOOTH_CALL usbbluetooth_get_device_list(usbbluetooth_device_t ***list_ptr)
 {
+    usbbluetooth_log_debug("usbbluetooth_get_device_list");
+
     // Check list parameter
     if (list_ptr == NULL)
         return USBBLUETOOTH_STATUS_ERR_UNK;
@@ -15,12 +18,14 @@ usbbluetooth_status_t USBBLUETOOTH_CALL usbbluetooth_get_device_list(usbbluetoot
     // Get a list of all devices...
     libusb_device **devs_internal;
     int r = libusb_get_device_list(NULL, &devs_internal);
+    usbbluetooth_log_debug("libusb_get_device_list[r=%d]", r);
     if (r < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 
     // Count the number of bluetooth devices...
     int num_devs = 0;
     r = _count_bluetooth_devices(devs_internal, &num_devs);
+    usbbluetooth_log_debug("_count_bluetooth_devices[r=%d, n=%d]", r, num_devs);
     if (r < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 

@@ -8,6 +8,7 @@ libusbbluetooth_src = files([
   'usbbluetooth_core.c',
   'usbbluetooth_device.c',
   'usbbluetooth_io.c',
+  'usbbluetooth_log.c',
   'utils.c',
 ])
 libusbbluetooth_pub_headers = files([
@@ -16,7 +17,8 @@ libusbbluetooth_pub_headers = files([
   'usbbluetooth_api.h',
   'usbbluetooth_core.h',
   'usbbluetooth_device.h',
-  'usbbluetooth_io.h'
+  'usbbluetooth_io.h',
+  'usbbluetooth_log.h'
 ])
 libusbbluetooth_target = library('usbbluetooth',
   sources : libusbbluetooth_src,

@@ -89,3 +89,4 @@ _setup_func(_lib, "usbbluetooth_write", _CStatus,
             [ctypes.POINTER(_CDevice), ctypes.POINTER(ctypes.c_uint8), ctypes.c_uint16])
 _setup_func(_lib, "usbbluetooth_read", _CStatus,
             [ctypes.POINTER(_CDevice), ctypes.POINTER(ctypes.c_uint8), ctypes.POINTER(ctypes.c_uint16)])
+_setup_func(_lib, "usbbluetooth_log_set_level", None, [ctypes.c_int])

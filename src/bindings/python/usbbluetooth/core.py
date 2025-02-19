@@ -2,6 +2,7 @@
 
 import ctypes
 from usbbluetooth import _c_library
+from usbbluetooth.log import LogLevel
 
 
 def _check_status(status: _c_library._CStatus):
@@ -14,6 +15,8 @@ def _check_status(status: _c_library._CStatus):
         raise Exception("Unknown error!")
     elif status == _c_library._CStatus.ERR_NOMEM:
         raise Exception("Out of memory error!")
+    elif status == _c_library._CStatus.ERR_DEVICE_CLOSED:
+        raise Exception("Device closed!")
     else:
         raise Exception("Undocumented error!")
 
@@ -84,3 +87,6 @@ def list_devices() -> list[UsbBluetoothDevice]:
         dev_list.append(UsbBluetoothDevice(ctx, dev_ref))
     _c_library.usbbluetooth_free_device_list(ctypes.byref(c_list))
     return dev_list
+
+def set_log_level(level: LogLevel):
+    _c_library.usbbluetooth_log_set_level(level.value)

@@ -5,5 +5,6 @@
 #include <usbbluetooth_core.h>
 #include <usbbluetooth_device.h>
 #include <usbbluetooth_io.h>
+#include <usbbluetooth_log.h>
 
 #endif
