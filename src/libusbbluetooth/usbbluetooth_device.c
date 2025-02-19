@@ -64,7 +64,9 @@ static int _count_bluetooth_devices(libusb_device **list, int *num)
         // Check if device has a Bluetooth interface...
         bool is_bt = false;
         int r = _is_bluetooth_device(dev, &is_bt);
-        if (r < LIBUSB_SUCCESS)
+        if (r == LIBUSB_ERROR_NOT_FOUND)
+            is_bt = false;
+        else if (r < LIBUSB_SUCCESS)
             return r;
         if (is_bt)
             (*num)++;
