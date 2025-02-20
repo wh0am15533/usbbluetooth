@@ -38,13 +38,14 @@ void USBBLUETOOTH_CALL usbbluetooth_log_set_level(usbbluetooth_log_level_t level
 {
     _log_level = level;
     libusb_set_option(NULL, LIBUSB_OPTION_LOG_LEVEL, _log_level_to_libusb(level));
+    usbbluetooth_log_debug("usbbluetooth_log_set_level[l=%d]", level);
 }
 
 void usbbluetooth_log(usbbluetooth_log_level_t level, const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-    if (level < _log_level)
+    if (level <= _log_level)
         _log_format(level, fmt, args);
     va_end(args);
 }
