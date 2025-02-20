@@ -1,11 +1,14 @@
 # API for Python
 
-The `usbbluetooth` library can be used via a Python API.
+If you want to use this library with Scapy, please checkout [scapy-usbbluetooth](https://github.com/antoniovazquezblanco/scapy-usbbluetooth), otherwise, the `usbbluetooth` library can be used via a Python API.
 
 In order to use the library in python just install the Python package.
-The package is available in wheel format in https://github.com/antoniovazquezblanco/usbbluetooth/releases.
+You may install the package from Pypi:
+```bash
+pip install usbbluetooth
+```
 
-After downloading the file, you may install it with pip:
+The package is also available in wheel format in https://github.com/antoniovazquezblanco/usbbluetooth/releases. After downloading the file, you may install it with pip:
 ```bash
 pip install usbbluetooth-*.whl
 ```
