@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static UsbBluetooth.UsbBluetoothWrapper;
+﻿using static UsbBluetooth.UsbBluetoothWrapper;
 
 namespace UsbBluetooth
 {
@@ -40,6 +35,11 @@ namespace UsbBluetooth
             usbbluetooth_free_device_list(&list);
 
             return devs.ToArray();
+        }
+
+        public static void SetLogLevel(UsbBluetoothLogLevel l)
+        {
+            usbbluetooth_log_set_level(l);
         }
     }
 }

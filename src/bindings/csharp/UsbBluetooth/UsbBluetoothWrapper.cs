@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace UsbBluetooth
 {
@@ -45,5 +44,8 @@ namespace UsbBluetooth
 
         [DllImport("libusbbluetooth")]
         internal unsafe static extern UsbBluetoothStatus usbbluetooth_read(UsbBluetoothDeviceStruct* dev, byte* data, ushort* size);
+
+        [DllImport("libusbbluetooth")]
+        internal unsafe static extern void usbbluetooth_log_set_level(UsbBluetoothLogLevel level);
     }
 }
