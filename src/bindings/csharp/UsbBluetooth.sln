@@ -5,8 +5,6 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsbBluetooth", "UsbBluetooth\UsbBluetooth.csproj", "{814B9BD9-A6BB-432D-858E-9641557DA6B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbBluetoothTest", "UsbBluetoothTest\UsbBluetoothTest.csproj", "{76CEC0C1-6FE2-4155-B712-66C108164C64}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{814B9BD9-A6BB-432D-858E-9641557DA6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{814B9BD9-A6BB-432D-858E-9641557DA6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{814B9BD9-A6BB-432D-858E-9641557DA6B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76CEC0C1-6FE2-4155-B712-66C108164C64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76CEC0C1-6FE2-4155-B712-66C108164C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76CEC0C1-6FE2-4155-B712-66C108164C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76CEC0C1-6FE2-4155-B712-66C108164C64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
