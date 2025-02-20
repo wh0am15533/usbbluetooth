@@ -121,5 +121,7 @@ usbbluetooth_status_t USBBLUETOOTH_CALL usbbluetooth_read(usbbluetooth_device_t 
     if (err != LIBUSB_ERROR_TIMEOUT)
         return (err == LIBUSB_SUCCESS) ? USBBLUETOOTH_STATUS_OK : USBBLUETOOTH_STATUS_ERR_UNK;
 
+    // No data to retrieve...
+    *size = 0;
     return USBBLUETOOTH_STATUS_OK;
 }
