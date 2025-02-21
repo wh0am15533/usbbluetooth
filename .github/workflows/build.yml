@@ -125,3 +125,4 @@ jobs:
         files: |
           usbbluetooth_*/winx64_usbbluetooth_*.zip
           usbbluetooth_*/usbbluetooth*.whl
+          usbbluetooth_*/usbbluetooth*.nupkg
