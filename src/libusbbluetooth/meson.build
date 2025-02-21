@@ -1,5 +1,7 @@
 # Check if libusb is present, otherwise build it...
-libusb_dep = dependency('libusb-1.0')
+# Statically link it in Windows targets
+libusb_static = target_machine.system() == 'windows' or target_machine.system() == 'cygwin'
+libusb_dep = dependency('libusb-1.0', static : libusb_static)
 
 # Project library
 libusbbluetooth_inc = include_directories('.')
