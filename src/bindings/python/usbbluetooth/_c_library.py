@@ -12,7 +12,7 @@ def _lib_name() -> str:
     '''
     lib_names = {
         'darwin': 'libusbbluetooth.dylib',
-        'win32': 'usbbluetooth.dll',
+        'win32': 'libusbbluetooth.dll',
         'linux': 'libusbbluetooth.so'
     }
     return lib_names.get(sys.platform, 'libusbbluetooth.so')
