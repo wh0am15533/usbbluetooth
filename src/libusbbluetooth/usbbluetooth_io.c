@@ -111,13 +111,13 @@ usbbluetooth_status_t USBBLUETOOTH_CALL usbbluetooth_read(usbbluetooth_device_t 
     if (dev->handle == NULL)
         return USBBLUETOOTH_STATUS_ERR_DEVICE_CLOSED;
 
-    int err = _read_data(dev, data, size);
-    usbbluetooth_log_debug("_read_data[err=%d, size=%d]", err, *size);
+    int err = _read_evts(dev, data, size);
+    usbbluetooth_log_debug("_read_evts[err=%d, size=%d]", err, *size);
     if (err != LIBUSB_ERROR_TIMEOUT)
         return (err == LIBUSB_SUCCESS) ? USBBLUETOOTH_STATUS_OK : USBBLUETOOTH_STATUS_ERR_UNK;
 
-    err = _read_evts(dev, data, size);
-    usbbluetooth_log_debug("_read_evts[err=%d, size=%d]", err, *size);
+    err = _read_data(dev, data, size);
+    usbbluetooth_log_debug("_read_data[err=%d, size=%d]", err, *size);
     if (err != LIBUSB_ERROR_TIMEOUT)
         return (err == LIBUSB_SUCCESS) ? USBBLUETOOTH_STATUS_OK : USBBLUETOOTH_STATUS_ERR_UNK;
 
