@@ -89,7 +89,7 @@ int _read_data(usbbluetooth_device_t *dev, uint8_t *data, uint16_t *size)
     if (err < LIBUSB_SUCCESS)
         return err;
     data[0] = HCI_HDR_TYPE_ACL;
-    *size = recevd;
+    *size = recevd + 1;
     return LIBUSB_SUCCESS;
 }
 
@@ -100,7 +100,7 @@ int _read_evts(usbbluetooth_device_t *dev, uint8_t *data, uint16_t *size)
     if (err < LIBUSB_SUCCESS)
         return err;
     data[0] = HCI_HDR_TYPE_EVT;
-    *size = recevd;
+    *size = recevd + 1;
     return LIBUSB_SUCCESS;
 }
 
