@@ -57,7 +57,7 @@ jobs:
           builddir/src/libusbbluetooth/libusbbluetooth.${{ matrix.sys.ext }}
           builddir/winx64_usbbluetooth_*.zip
 
-  build_bindings:
+  build_bindings_python:
     needs: build_library
     runs-on: ubuntu-latest
     steps:
@@ -72,37 +72,57 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install meson libusb-1.0-0 libusb-1.0-0-dev dotnet-sdk-8.0
+        sudo apt-get install meson libusb-1.0-0 libusb-1.0-0-dev
         python -m venv venv
         source venv/bin/activate
         pip install build
 
     - name: Copy library
-      run: |
-        cp usbbluetooth_*/src/libusbbluetooth/*.{so,dll,dylib} src/bindings/python/usbbluetooth/lib/
-        cp usbbluetooth_*/src/libusbbluetooth/*.{so,dll,dylib} src/bindings/csharp/UsbBluetooth/
+      run: cp usbbluetooth_*/src/libusbbluetooth/*.{so,dll,dylib} src/bindings/python/usbbluetooth/lib/
 
     - name: Configure
       run: |
         source venv/bin/activate
         meson setup builddir
 
-    - name: Build python package
+    - name: Build package
       run: |
         source venv/bin/activate
         meson compile usbbluetooth_python -v -C builddir
 
-    - name: Build C# package
-      run:
-        meson compile usbbluetooth_csharp -v -C builddir
-
-    - name: Upload Python artifacts
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: usbbluetooth_python
         path: builddir/src/bindings/python/*
 
-    - name: Upload C# artifacts
+  build_bindings_csharp:
+    needs: build_library
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install meson dotnet-sdk-8.0
+
+    - name: Copy library
+      run: cp usbbluetooth_*/src/libusbbluetooth/*.{so,dll,dylib} src/bindings/csharp/UsbBluetooth/
+
+    - name: Configure
+      run: meson setup builddir
+
+    - name: Build package
+      run: meson compile usbbluetooth_csharp -v -C builddir
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: usbbluetooth_csharp
@@ -110,7 +130,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [build_library, build_bindings]
+    needs: [build_library, build_bindings_python, build_bindings_csharp]
     if: contains(github.ref, 'refs/tags/v')
     permissions:
       contents: write
