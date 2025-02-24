@@ -19,11 +19,11 @@ typedef enum
 usbbluetooth_status_t USBBLUETOOTH_CALL usbbluetooth_open(usbbluetooth_device_t *dev)
 {
     // Open the device and get a handle...
-    int err = libusb_open(dev->device, &dev->handle);
+    int err = libusb_open(dev->device.usb, &dev->handle);
     if (err < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 
-    err = _dev_find_bluetooth_interface(dev->device, &dev->interface_num);
+    err = _dev_find_bluetooth_interface(dev->device.usb, &dev->interface_num);
     if (err < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 
@@ -35,15 +35,15 @@ usbbluetooth_status_t USBBLUETOOTH_CALL usbbluetooth_open(usbbluetooth_device_t 
     if (err < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 
-    err = _dev_find_evt_ep(dev->device, &dev->epnum_evt);
+    err = _dev_find_evt_ep(dev->device.usb, &dev->epnum_evt);
     if (err < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 
-    err = _dev_find_acl_in_ep(dev->device, &dev->epnum_acl_in);
+    err = _dev_find_acl_in_ep(dev->device.usb, &dev->epnum_acl_in);
     if (err < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 
-    err = _dev_find_acl_out_ep(dev->device, &dev->epnum_acl_out);
+    err = _dev_find_acl_out_ep(dev->device.usb, &dev->epnum_acl_out);
     if (err < LIBUSB_SUCCESS)
         return USBBLUETOOTH_STATUS_ERR_UNK;
 

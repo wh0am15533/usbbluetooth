@@ -46,6 +46,7 @@ class _CStatus(IntEnum):
 
 class _CDevice(ctypes.Structure):
     _fields_ = (("ref_count", ctypes.c_uint8),
+                ("type", ctypes.c_int),
                 ("device", ctypes.c_voidp),
                 ("vendor_id", ctypes.c_uint16),
                 ("product_id", ctypes.c_uint16),

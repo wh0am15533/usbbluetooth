@@ -7,12 +7,25 @@
 #include <libusb.h>
 
 /**
+ * Device type enumeration.
+ */
+typedef enum
+{
+    USBBLUETOOTH_DEVICE_TYPE_USB = 0,
+    USBBLUETOOTH_DEVICE_TYPE_SERIAL = 1
+} usbbluetooth_device_type_t;
+
+/**
  * USB Bluetooth device struct.
  */
 typedef struct
 {
     uint8_t ref_count;
-    libusb_device *device;
+    usbbluetooth_device_type_t type;
+    union
+    {
+        libusb_device *usb;
+    } device;
     uint16_t vendor_id;
     uint16_t product_id;
     libusb_device_handle *handle;
@@ -35,7 +48,7 @@ void USBBLUETOOTH_CALL usbbluetooth_free_device_list(usbbluetooth_device_t ***li
 /**
  * Get a reference to a Bluetooth device.
  */
-usbbluetooth_device_t * USBBLUETOOTH_CALL usbbluetooth_reference_device(usbbluetooth_device_t *dev);
+usbbluetooth_device_t *USBBLUETOOTH_CALL usbbluetooth_reference_device(usbbluetooth_device_t *dev);
 
 /**
  * Unreference the device to free memory.

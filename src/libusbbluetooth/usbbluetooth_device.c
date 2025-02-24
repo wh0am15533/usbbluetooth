@@ -83,7 +83,8 @@ static usbbluetooth_device_t *_dev_from_libusb(libusb_device *dev)
 {
     usbbluetooth_device_t *btdev = calloc(1, sizeof(usbbluetooth_device_t));
     btdev->ref_count = 0;
-    btdev->device = libusb_ref_device(dev);
+    btdev->type = USBBLUETOOTH_DEVICE_TYPE_USB;
+    btdev->device.usb = libusb_ref_device(dev);
     struct libusb_device_descriptor desc;
     libusb_get_device_descriptor(dev, &desc);
     btdev->vendor_id = desc.idVendor;
@@ -129,7 +130,7 @@ void USBBLUETOOTH_CALL usbbluetooth_unreference_device(usbbluetooth_device_t **d
     dev->ref_count--;
     
     if (dev->ref_count == 0) {
-        libusb_unref_device(dev->device);
+        libusb_unref_device(dev->device.usb);
         free(dev);
         *dev_ptr = NULL;
     }

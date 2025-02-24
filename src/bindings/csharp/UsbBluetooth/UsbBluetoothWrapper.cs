@@ -13,6 +13,7 @@ namespace UsbBluetooth
         internal unsafe struct UsbBluetoothDeviceStruct
         {
             byte ref_count;
+            int type;
             void* device;
             public ushort vendor_id;
             public ushort product_id;
